@@ -40,15 +40,6 @@ const initialAlimentation = [
   { id: 3, date: "2026-05-16", type: "Aliment engraissement", quantite: 80, cout: 52, animaux: "Porcs lot B" },
 ];
 
-function Icon({ name, size = 20 }) {
-  const icons = {
-    pig: "🐷", money: "💰", food: "🌽", heart: "❤️", add: "＋",
-    back: "←", calendar: "📅", weight: "⚖️", alert: "⚠️",
-    check: "✓", birth: "🐣", stats: "📊", home: "🏠", edit: "✏️",
-    trash: "🗑️", leaf: "🌿", tag: "🏷️"
-  };
-  return <span style={{ fontSize: size }}>{icons[name] || "•"}</span>;
-}
 
 function Badge({ label, color }) {
   const colors = {

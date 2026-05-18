@@ -40,10 +40,6 @@ const initialAlimentation = [
   { id: 3, date: "2026-05-16", type: "Aliment engraissement", quantite: 80, cout: 52, animaux: "Porcs lot B" },
 ];
 
-  };
-  return <span style={{ fontSize: size }}>{icons[name] || "•"}</span>;
-}
-
 function Badge({ label, color }) {
   const colors = {
     "Bonne": theme.accent,

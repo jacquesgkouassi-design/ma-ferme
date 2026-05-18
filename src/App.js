@@ -40,6 +40,15 @@ const initialAlimentation = [
   { id: 3, date: "2026-05-16", type: "Aliment engraissement", quantite: 80, cout: 52, animaux: "Porcs lot B" },
 ];
 
+function Icon({ name, size = 20 }) {
+  const icons = {
+    pig: "🐷", money: "💰", food: "🌽", heart: "❤️", add: "＋",
+    back: "←", calendar: "📅", weight: "⚖️", alert: "⚠️",
+    check: "✓", birth: "🐣", stats: "📊", home: "🏠", edit: "✏️",
+    trash: "🗑️", leaf: "🌿", tag: "🏷️"
+  };
+  return <span style={{ fontSize: size }}>{icons[name] || "•"}</span>;
+}
 
 function Badge({ label, color }) {
   const colors = {
@@ -155,7 +164,7 @@ function HomeScreen({ animaux, ventes, portees, alimentation }) {
       <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
         <StatBox icon="🐷" label="Animaux" value={totalAnimaux} />
         <StatBox icon="🐣" label="En gestation" value={gestantes} color={theme.info} />
-        <StatBox icon="💰" label="Ce mois" value={`${revenusMois}€`} color="#4ae09e" />
+        <StatBox icon="💰" label="Ce mois" value={`${revenusMois}F CFA`} color="#4ae09e" />
       </div>
 
       {/* Alertes */}
@@ -198,7 +207,7 @@ function HomeScreen({ animaux, ventes, portees, alimentation }) {
             </div>
             <div style={{ textAlign: "right" }}>
               <div style={{ color: theme.accent, fontWeight: 700 }}>{a.quantite} kg</div>
-              <div style={{ color: theme.textMuted, fontSize: 11 }}>{a.cout}€</div>
+              <div style={{ color: theme.textMuted, fontSize: 11 }}>{a.cout}F CFA</div>
             </div>
           </div>
         </Card>
@@ -452,7 +461,7 @@ function AlimentationScreen({ alimentation, setAlimentation }) {
     <div>
       <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
         <StatBox icon="🌽" label="Total kg" value={totalKg} />
-        <StatBox icon="💸" label="Coût total" value={`${totalCout}€`} color={theme.warning} />
+        <StatBox icon="💸" label="Coût total" value={`${totalCout}F CFA`} color={theme.warning} />
         <StatBox icon="📋" label="Distributions" value={alimentation.length} />
       </div>
 
@@ -466,7 +475,7 @@ function AlimentationScreen({ alimentation, setAlimentation }) {
             </div>
             <div style={{ textAlign: "right" }}>
               <div style={{ color: theme.accent, fontWeight: 800, fontSize: 18 }}>{a.quantite} <span style={{ fontSize: 11 }}>kg</span></div>
-              <div style={{ color: theme.warning, fontSize: 12 }}>{a.cout}€</div>
+              <div style={{ color: theme.warning, fontSize: 12 }}>{a.cout}F CFA</div>
             </div>
           </div>
         </Card>
@@ -479,7 +488,7 @@ function AlimentationScreen({ alimentation, setAlimentation }) {
             ["Date", "date", "date"],
             ["Type d'aliment", "type", "text"],
             ["Quantité (kg)", "quantite", "number"],
-            ["Coût (€)", "cout", "number"],
+            ["Coût (F CFA)", "cout", "number"],
             ["Animaux concernés", "animaux", "text"],
           ].map(([label, key, type]) => (
             <div key={key} style={{ marginBottom: 10 }}>
@@ -524,7 +533,7 @@ function VentesScreen({ ventes, setVentes }) {
   return (
     <div>
       <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
-        <StatBox icon="💰" label="Revenus totaux" value={`${totalRevenu}€`} color="#4ae09e" />
+        <StatBox icon="💰" label="Revenus totaux" value={`${totalRevenu}F CFA`} color="#4ae09e" />
         <StatBox icon="⚖️" label="Kg vendus" value={totalKg} />
         <StatBox icon="📦" label="Ventes" value={ventes.length} />
       </div>
@@ -535,9 +544,9 @@ function VentesScreen({ ventes, setVentes }) {
             <div>
               <div style={{ color: theme.text, fontWeight: 700 }}>🥩 {v.animal}</div>
               <div style={{ color: theme.textMuted, fontSize: 11, marginTop: 2 }}>🏷️ {v.acheteur}</div>
-              <div style={{ color: theme.textMuted, fontSize: 11 }}>📅 {v.date} · {v.poids} kg · {v.prixKg}€/kg</div>
+              <div style={{ color: theme.textMuted, fontSize: 11 }}>📅 {v.date} · {v.poids} kg · {v.prixKg}F CFA/kg</div>
             </div>
-            <div style={{ color: "#4ae09e", fontWeight: 900, fontSize: 20 }}>{v.total}€</div>
+            <div style={{ color: "#4ae09e", fontWeight: 900, fontSize: 20 }}>{v.total}F CFA</div>
           </div>
         </Card>
       ))}
@@ -549,8 +558,8 @@ function VentesScreen({ ventes, setVentes }) {
             ["Date", "date", "date"],
             ["Animal / Lot", "animal", "text"],
             ["Poids (kg)", "poids", "number"],
-            ["Prix/kg (€)", "prixKg", "number"],
-            ["Total (€)", "total", "number"],
+            ["Prix/kg (F CFA)", "prixKg", "number"],
+            ["Total (F CFA)", "total", "number"],
             ["Acheteur", "acheteur", "text"],
           ].map(([label, key, type]) => (
             <div key={key} style={{ marginBottom: 10 }}>
